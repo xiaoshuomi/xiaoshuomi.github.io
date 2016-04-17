@@ -23,7 +23,7 @@ after_script:
 
 branches:
   only:
-    - source
+    - master
 env:
  global:
    - GH_REF: github.com/xiaoshuomi/xiaoshuomi.github.io.git
