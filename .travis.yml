@@ -1,0 +1,30 @@
+
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+before_script:
+  - npm install hexo -g
+script:
+  - hexo clean && hexo g
+
+after_script:
+  - cd public
+  - git init
+  - git config user.name "anrong"
+  - git config user.email "anrong520@outlook.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    - source
+env:
+ global:
+   - GH_REF: github.com/xiaoshuomi/xiaoshuomi.github.io.git
+   - secure: "HWowX5KNYAiEsmHPPxfX6zGwTYqDxqz61Us9n7Rn5Q4alOiNqHcr7rIMZJZEr32JW/w8onNEZtWUdFxX+9ezRPqI0ZeT3bmVT6H1YNxrS7Bzyi1s17BH5rdt/6MfAZVvCOwIdrRB417XlmpqE/ATe4cIm35yTXgaTWtdUjFH0mZ+6AI6bYjELMdo1Ja2eOQ4mHIZFFm9cO9u+cZGWsDTyI/78s62Gj3h9PNfjmSh+p0WSxHUTgGsES9eem7Qscz9nKlvNRF5S9KmNGtW1WRA6ONYlB/BCpzkF0LAcichJszn0ydTkO/bAMq84qJX4wxMCzR52d41m6vwVqxuiSFYYgrASwJTlpcP1+edi8PuQpUhbwIYEHtVOQELS0ARWw98e45DhMirL+EpwaNbPXg2jJV6ckJwmCmE2/M9qCKqJXCyQecf9FDHfI2YkEJDkzlxU1HjYAdvnbMhRFYVpfUVTAuth8WbMY6cu+iCe8bEY+Y0ZtcTLCgC3u8FLRpGaIZy4+mnt4ftWRI+40CmOZSZH4nfMSJtEsCkm0UfaggSBbT0MAWI2oSq6E71WcRThPd1+THBmE7exF5HyuOoXTlF/kJSJhH4pIw8hE7hFXy9XZCephcbjmQunKgQaaMe4Cyl4EGDKohyyKW6OMpnIevyiIgpBqUueMrrf+4SWySZKp4="
